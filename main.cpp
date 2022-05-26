@@ -11,7 +11,7 @@ public:
 	// Конструктор
 	Matrix(int n, int m)
 	{
-		cout << "Constructor" << endl;
+		/*cout << "Constructor" << endl;*/
 		m_n = n;
 		m_m = m;
 		m_mat = new int* [m_n];
@@ -22,8 +22,7 @@ public:
 	// Конструктор копирования
 	Matrix(const Matrix& mat)
 	{
-		cout << "Copy constructor" << endl;
-
+		/*cout << "Copy constructor" << endl;*/
 		m_n = mat.m_n;
 		m_m = mat.m_m;
 
@@ -34,6 +33,15 @@ public:
 		for (int i = 0; i < m_n; i++)
 			for (int j = 0; j < m_m; j++)
 				m_mat[i][j] = mat.m_mat[i][j];
+	}
+
+	// Деструктор
+	~Matrix()
+	{
+		/*cout << "Destructor" << endl;*/
+		for (int i = 0; i < m_n; i++)
+			delete[] m_mat[i];
+		delete m_mat;
 	}
 
 	// Присваивание
@@ -103,22 +111,9 @@ public:
 		return tmp;
 	}
 	
-	// Деструктор
-	~Matrix()
-	{
-		cout << "Destructor" << endl;
-		for (int i = 0; i < m_n; i++)
-			delete[] m_mat[i];
-		delete m_mat;
-	}
-
-	// friend - позволяет функции иметь доступ к private полям/методам класса
-	friend istream& operator>>(istream& os, Matrix& mat);
-	friend ostream& operator<<(ostream& os, const Matrix& mat);
 
 	int Determin()
 	{
-		cout << endl << "Matrix determinant: " << endl;
 
 		if ((m_n == 2) && (m_m == 2))
 		{
@@ -134,8 +129,7 @@ public:
 
 	Matrix Transposit()
 	{
-		cout << endl << "Matrix transposition: " << endl;
-
+		
 		Matrix tmp(m_n, m_m);
 		for (int i = 0; i < m_n; i++)
 		{
@@ -147,10 +141,8 @@ public:
 		return tmp;
 	}
 
-	Matrix Inverse()
+	Matrix Inverse()	
 	{
-		cout << endl << "Inverse matrix: " << endl;
-
 		Matrix tmp(m_n, m_m);
 		for (int i = 0; i < m_n; i++)
 		{
@@ -191,10 +183,14 @@ public:
 			cout << endl << "This operation doesn't work for this size!" << endl;
 	}
 
+	// friend - позволяет функции иметь доступ к private полям/методам класса
+	friend istream& operator>>(istream& os, Matrix& mat);
+	friend ostream& operator<<(ostream& os, const Matrix& mat);
+
 	// Использование внутри класса
 private:
 	int m_n, m_m;		// Поле
-	int n;
+	//int n;
 	int** m_mat; // Matrix
 };
 
@@ -230,28 +226,36 @@ int main()
 
 	Matrix A(n_2, m_2);
 
+	cout << "Enter the A (2x2) matrix: " << endl;
 	cin >> A;
 
 	cout << A << endl;
 
+	cout << endl << "Matrix determinant: " << endl;
 	cout << A.Determin() << endl;
 
+	cout << endl << "Matrix transposition: " << endl;
 	cout << A.Transposit() << endl;
 
+	cout << endl << "Inverse matrix: " << endl;
 	cout << A.Inverse() << endl;
 
 	// // // // // // // // // // // // // // //
 
 	Matrix B(n_3, m_3);
 
+	cout << "Enter the B (3x3) matrix: " << endl;
 	cin >> B;
 
 	cout << B << endl;
 
+	cout << endl << "Matrix determinant: " << endl;
 	cout << B.Determin() << endl;
 
+	cout << endl << "Matrix transposition: " << endl;
 	cout << B.Transposit() << endl;
 
+	cout << endl << "Inverse matrix: " << endl;
 	cout << B.Inverse() << endl;
 
 	// // // // // // // // // // // // // // //
