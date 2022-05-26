@@ -36,27 +36,6 @@ public:
 				m_mat[i][j] = mat.m_mat[i][j];
 	}
 
-	// Перегрузка оператора ввода
-	istream& operator>>(istream& in, Matrix& mat)
-	{
-		for (int i = 0; i < mat.m_n; i++)
-			for (int j = 0; j < mat.m_m; j++)
-				in >> mat.m_mat[i][j];
-		return in;
-	}
-
-	// Перегрузка оператора вывода
-	ostream& operator<<(ostream& out, const Matrix& mat)
-	{
-		out << "Matrix " << mat.m_n << "x" << mat.m_m << endl;
-		for (int i = 0; i < mat.m_n; i++) {
-			for (int j = 0; j < mat.m_m; j++)
-				out << mat.m_mat[i][j] << " ";
-			out << endl;
-		}
-		return out;
-	}
-
 	// Присваивание
 	Matrix& operator=(const Matrix& mat)
 	{
@@ -218,6 +197,28 @@ private:
 	int n;
 	int** m_mat; // Matrix
 };
+
+// Перегрузка оператора ввода
+istream& operator>>(istream& in, Matrix& mat)
+{
+	for (int i = 0; i < mat.m_n; i++)
+		for (int j = 0; j < mat.m_m; j++)
+			in >> mat.m_mat[i][j];
+	return in;
+}
+
+// Перегрузка оператора вывода
+ostream& operator<<(ostream& out, const Matrix& mat)
+{
+	out << "Matrix " << mat.m_n << "x" << mat.m_m << endl;
+	for (int i = 0; i < mat.m_n; i++) {
+		for (int j = 0; j < mat.m_m; j++)
+			out << mat.m_mat[i][j] << " ";
+		out << endl;
+	}
+	return out;
+}
+
 
 
 int main()
